@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SketchRendere : Sketch {
+public class SketchRendere : BaseSketch {
 
     GameObject[] line;
     LineRenderer[] lineRendererX;
@@ -10,45 +10,45 @@ public class SketchRendere : Sketch {
     [SerializeField] private GameObject prefab;
     private LineRenderer _renderer;
 
-
-    private Vector3 GetScreenTopLeft(Camera mainCamera) {
-        Vector3 topLeft = mainCamera.ScreenToWorldPoint(Vector3.zero);
-        topLeft.Scale(new Vector3(1f, -1f, 1f));
-        return topLeft;
-    }
-
-    private Vector3 GetScreenBottomRight(Camera mainCamera) {
-        Vector3 bottomRight = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0.0f));
-        bottomRight.Scale(new Vector3(1f, -1f, 1f));
-        return bottomRight;
-    }
-
-
     public void RenderingSketchSquears() {
-        Camera mainCamera;
-        GameObject obj = GameObject.Find("Main Camera");
-        mainCamera = obj.GetComponent<Camera>();
-        Vector2 topLeft = GetScreenTopLeft(mainCamera), bottomRight = GetScreenBottomRight(mainCamera);
-        float screenWidth = bottomRight.x - topLeft.x;
-        float screenHight = bottomRight.y - topLeft.y;
-        float blockSizeX = screenWidth / blockCount;
-        float blockSizeY = screenHight / blockCount;
+        Vector2 topLeft = GetScreenTopLeft(), bottomRight = GetScreenBottomRight();
         for (int x = 0; x <= blockCount; x++) {
-            lineRendererX[x].SetWidth(0.1f, 0.1f);
-            lineRendererX[x].SetVertexCount(2);
-            lineRendererX[x].SetPosition(0, new Vector3(topLeft.x + x * blockSizeX, topLeft.y, 0f));
-            lineRendererX[x].SetPosition(1, new Vector3(topLeft.x + x * blockSizeX, bottomRight.y, 0f));
+            var line = lineRendererX[x];
+            line.SetWidth(0.1f, 0.1f);
+            line.SetVertexCount(2);
+            line.SetPosition(0, new Vector3(topLeft.x + x * blockSizeX, topLeft.y, 0f));
+            line.SetPosition(1, new Vector3(topLeft.x + x * blockSizeX, bottomRight.y, 0f));
         }
         for (int y = 0; y <= blockCount; y++) {
-            lineRendererY[y].SetWidth(0.1f, 0.1f);
-            lineRendererY[y].SetVertexCount(2);
-            lineRendererY[y].SetPosition(0, new Vector3(topLeft.x, topLeft.y + y * blockSizeY, 0f));
-            lineRendererY[y].SetPosition(1, new Vector3(bottomRight.x, topLeft.y + y * blockSizeY, 0f));
+            var line = lineRendererY[y];
+            line.SetWidth(0.1f, 0.1f);
+            line.SetVertexCount(2);
+            line.SetPosition(0, new Vector3(topLeft.x, topLeft.y + y * blockSizeY, 0f));
+            line.SetPosition(1, new Vector3(bottomRight.x, topLeft.y + y * blockSizeY, 0f));
+        }
+    }
+
+    private void SetLine() {
+        for (int x = 0; x <= blockCount; x++) {
+            lineRendererX[x].enabled = true;
+        }
+        for (int y = 0; y <= blockCount; y++) {
+            lineRendererY[y].enabled = true;
+        }
+    }
+
+    private void RemoveLine() {
+        for (int x = 0; x <= blockCount; x++) {
+            lineRendererX[x].enabled = false;
+        }
+        for (int y = 0; y <= blockCount; y++) {
+            lineRendererY[y].enabled = false;
         }
     }
 
     // Use this for initialization
-    void Start() {
+    protected virtual void Start() {
+        base.Start();
         lineRendererX = new LineRenderer[blockCount + 1];
         lineRendererY = new LineRenderer[blockCount + 1];
         _renderer = prefab.GetComponent<LineRenderer>();
@@ -59,7 +59,16 @@ public class SketchRendere : Sketch {
     }
 
     // Update is called once per frame
-    void Update() {
-        RenderingSketchSquears();
+    protected override void Update() {
+
+        base.Update();
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            RenderingSketchSquears();
+            SetLine();
+        }
+        else if(Input.GetKeyDown(KeyCode.Escape)) {
+            RemoveLine();
+        }
     }
 }
