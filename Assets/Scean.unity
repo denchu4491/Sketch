@@ -141,8 +141,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1015380403}
-  sketchable: 0
-  prefab: {fileID: 741664647}
+  isSketchable: 0
+  prefab: {fileID: 1331498786935542, guid: 60650a8b803c6514482d10efad221a01, type: 2}
 --- !u!4 &75846055
 Transform:
   m_ObjectHideFlags: 0
@@ -161,11 +161,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1916435956661214, guid: 879ffe8e1592d764d86fb7b71c432ccb,
     type: 2}
   m_PrefabInternal: {fileID: 2140987455}
---- !u!1 &741664647 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1331498786935542, guid: 60650a8b803c6514482d10efad221a01,
-    type: 2}
-  m_PrefabInternal: {fileID: 1362673267}
 --- !u!1 &1015380400
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,7 +283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1015380403}
-  sketchable: 0
+  isSketchable: 0
   prefab: {fileID: 631701440}
 --- !u!1001 &1362673267
 Prefab:
@@ -328,6 +323,10 @@ Prefab:
     - target: {fileID: 4532016688632068, guid: 60650a8b803c6514482d10efad221a01, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331498786935542, guid: 60650a8b803c6514482d10efad221a01, type: 2}
+      propertyPath: m_TagString
+      value: block
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 60650a8b803c6514482d10efad221a01, type: 2}
