@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SketchRendere : BaseSketch {
+public class SketchLine : BaseSketch {
 
     GameObject[] line;
     LineRenderer[] lineRendererX;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkecthBhavior : BaseSketch {
+public class SkecthBlock : BaseSketch {
 
 
     protected int[][] sketchedBlock = new int[blockCount + 1][];
@@ -25,7 +25,6 @@ public class SkecthBhavior : BaseSketch {
         //3倍するとなんかよくなる
         block[blockIndY][blockIndX] = Instantiate(originBlock);
         BoxCollider2D box2D = block[blockIndY][blockIndX].GetComponent<BoxCollider2D>();
-        //box2D.size = new Vector2(3 * blockSizeX, 3 * blockSizeY);
         box2D.transform.localScale = new Vector2(3 * blockSizeX, 3 * blockSizeY);
         box2D.transform.position = new Vector2(topLeft.x + blockSizeX * blockIndX + (blockSizeX / 2), topLeft.y + blockSizeY * blockIndY + (blockSizeY / 2));
     }
