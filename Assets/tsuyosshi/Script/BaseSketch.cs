@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class BaseSketch : MonoBehaviour {
 
-    public static int blockCount = 10;
+    public static int blockCount = 10; // 一列のblockの数
+    public static int existMaxBlockCount = 10;
     public Camera mainCamera;
     protected float blockSizeX, blockSizeY;
     public bool isSketchable;
+
 
     protected Vector3 GetScreenTopLeft() {
         Vector3 topLeft = mainCamera.ScreenToWorldPoint(Vector3.zero);

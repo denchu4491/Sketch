@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class SkecthBlock : BaseSketch {
 
-
+    private int existBlockCount;
     protected int[][] sketchedBlock = new int[blockCount + 1][];
     BoxCollider2D originBlock = new BoxCollider2D();
     BoxCollider2D[][] block = new BoxCollider2D[blockCount + 1][];
     [SerializeField] private GameObject prefab;
 
     private void Initialize() {
+        existBlockCount = 0;
         for(int y = 0; y <= blockCount; ++y) {
             for (int x = 0; x <= blockCount; ++x) {
                 sketchedBlock[y][x] = 0;
@@ -21,6 +22,7 @@ public class SkecthBlock : BaseSketch {
     private void CreateBlock(int blockIndX,int blockIndY) {
         if (sketchedBlock[blockIndY][blockIndX] == 1) return;
         sketchedBlock[blockIndY][blockIndX] = 1;
+        existBlockCount++;
         Vector2 topLeft = GetScreenTopLeft();
         //3倍するとなんかよくなる
         block[blockIndY][blockIndX] = Instantiate(originBlock);
@@ -40,6 +42,7 @@ public class SkecthBlock : BaseSketch {
 
     public void Sketch() {
         Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        if (existBlockCount >= existMaxBlockCount) return;
         if (mousePosition.x < GetScreenTopLeft().x || mousePosition.x > GetScreenBottomRight().x || mousePosition.y > GetScreenTopLeft().y || mousePosition.y < GetScreenBottomRight().y) return;
             if (Input.GetMouseButton(0)) {
             CreateBlock((int)((mousePosition.x - GetScreenTopLeft().x) / blockSizeX), (int)((mousePosition.y - GetScreenTopLeft().y) / blockSizeY));
