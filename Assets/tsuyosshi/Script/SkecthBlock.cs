@@ -5,29 +5,30 @@ using UnityEngine;
 public class SkecthBlock : BaseSketch {
 
     private int existBlockCount;
-    protected int[][] sketchedBlock = new int[blockCount + 1][];
+    private float existBlockTime;
+    protected int[][] sketchedBlock = new int[rowBlockMaxCount + 1][];
     BoxCollider2D originBlock = new BoxCollider2D();
-    BoxCollider2D[][] block = new BoxCollider2D[blockCount + 1][];
+    BoxCollider2D[][] block = new BoxCollider2D[rowBlockMaxCount + 1][];
     [SerializeField] private GameObject prefab;
-    private float blockTime;
 
     private void InitializeBlock() {
         existBlockCount = 0;
-        for(int y = 0; y <= blockCount; ++y) {
-            for (int x = 0; x <= blockCount; ++x) {
+        for(int y = 0; y <= rowBlockMaxCount; ++y) {
+            for (int x = 0; x <= columnBlockMaxCount; ++x) {
                 sketchedBlock[y][x] = 0;
             }
         }
     }
 
     private bool CheckCollision(Vector2 position) {
-        bool isCollision = Physics2D.BoxCast(position, new Vector2(blockSizeX, blockSizeX), 0f, Vector2.zero);
+        bool isCollision = Physics2D.BoxCast(position, new Vector2(blockSizeX, blockSizeY), 0f, Vector2.zero);
         return isCollision;
     }
 
     private void CreateBlock(int blockIndX,int blockIndY) {
         Vector2 topLeft = GetScreenTopLeft();
         Vector2 position = new Vector2(topLeft.x + blockSizeX * blockIndX + (blockSizeX / 2), topLeft.y + blockSizeY * blockIndY + (blockSizeY / 2));
+        if (blockIndX < 0 || blockIndX > columnBlockMaxCount || blockIndY < 0 || blockIndY > rowBlockMaxCount) return;
         if (sketchedBlock[blockIndY][blockIndX] == 1) return;
         if (CheckCollision(position)) return;
         sketchedBlock[blockIndY][blockIndX] = 1;
@@ -35,7 +36,7 @@ public class SkecthBlock : BaseSketch {
         //3倍するとなんかよくなる
         block[blockIndY][blockIndX] = Instantiate(originBlock);
         BoxCollider2D box2D = block[blockIndY][blockIndX].GetComponent<BoxCollider2D>();
-        box2D.transform.localScale = new Vector2(3 * blockSizeX, 3 * blockSizeY);
+        box2D.transform.localScale = new Vector2(1.3f * blockSizeX, 1.3f * blockSizeY);
         box2D.transform.position = new Vector2(topLeft.x + blockSizeX * blockIndX + (blockSizeX / 2), topLeft.y + blockSizeY * blockIndY + (blockSizeY / 2));
     }
 
@@ -50,7 +51,7 @@ public class SkecthBlock : BaseSketch {
 
     public void Sketch() {
         Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        if (existBlockCount >= existMaxBlockCount) return;
+        if (existBlockCount >= existBlockMaxCount) return;
         if (mousePosition.x < GetScreenTopLeft().x || mousePosition.x > GetScreenBottomRight().x || mousePosition.y > GetScreenTopLeft().y || mousePosition.y < GetScreenBottomRight().y) return;
             if (Input.GetMouseButton(0)) {
             CreateBlock((int)((mousePosition.x - GetScreenTopLeft().x) / blockSizeX), (int)((mousePosition.y - GetScreenTopLeft().y) / blockSizeY));
@@ -58,26 +59,26 @@ public class SkecthBlock : BaseSketch {
     }
 
     private void CountTime() {
-        blockTime += Time.deltaTime;
+        existBlockTime += Time.deltaTime;
     }
 
     private void ResetTime() {
-        blockTime = 0f;
+        existBlockTime = 0f;
     }
 
 	// Use this for initialization
 	protected override void Start () {
         base.Start();
         originBlock = prefab.GetComponent<BoxCollider2D>();
-        for (int i = 0; i <= blockCount; ++i) block[i] = new BoxCollider2D[blockCount + 1];
-        for (int i = 0; i <= blockCount; ++i) sketchedBlock[i] = new int[blockCount + 1];
+        for (int i = 0; i <= rowBlockMaxCount; ++i) block[i] = new BoxCollider2D[columnBlockMaxCount + 1];
+        for (int i = 0; i <= rowBlockMaxCount; ++i) sketchedBlock[i] = new int[columnBlockMaxCount + 1];
         ResetTime();
     }
 
     // Update is called once per frame
     protected override void Update () {
         base.Update();
-        if ((Input.GetKeyDown(KeyCode.Space) && isSketchable) || blockTime >= 5) {
+        if ((Input.GetKeyDown(KeyCode.Space) && isSketchable) || existBlockTime >= existBlockMaxTime) {
             DestroyBlock();
             InitializeBlock();
             ResetTime();

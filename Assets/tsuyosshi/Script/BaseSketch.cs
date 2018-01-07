@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class BaseSketch : MonoBehaviour {
 
-    public static int blockCount = 10; // 一列のblockの数
-    public static int existMaxBlockCount = 10;
+    public static int rowBlockMaxCount = 10;
+    public static int columnBlockMaxCount = 10;
+    public static int existBlockMaxCount = 10;
+    public static float existBlockMaxTime = 5.0f;
+
     public Camera mainCamera;
     protected float blockSizeX, blockSizeY;
     public bool isSketchable;
@@ -30,8 +33,8 @@ public class BaseSketch : MonoBehaviour {
         Vector2 topLeft = GetScreenTopLeft(), bottomRight = GetScreenBottomRight();
         float screenWidth = bottomRight.x - topLeft.x;
         float screenHight = bottomRight.y - topLeft.y;
-        blockSizeX = screenWidth / blockCount;
-        blockSizeY = screenHight / blockCount;
+        blockSizeX = screenWidth / columnBlockMaxCount;
+        blockSizeY = screenHight / rowBlockMaxCount;
 	}
 
 	// Update is called once per frame
