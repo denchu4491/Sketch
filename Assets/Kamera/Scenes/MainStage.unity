@@ -275,6 +275,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1637015132}
   isSketchable: 0
+  topLeftSketchPos: {x: 0, y: 0}
+  BottomRightSketchPos: {x: 0, y: 0}
   prefab: {fileID: 1331498786935542, guid: 60650a8b803c6514482d10efad221a01, type: 2}
 --- !u!4 &166612312
 Transform:
@@ -354,7 +356,7 @@ GameObject:
   - component: {fileID: 453678810}
   m_Layer: 0
   m_Name: DeathBorder
-  m_TagString: DeathObject
+  m_TagString: DeathZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -402,6 +404,34 @@ Transform:
   m_PrefabParentObject: {fileID: 4185597115229330, guid: 45d49bd4a0c3ded40a308859484b0c36,
     type: 2}
   m_PrefabInternal: {fileID: 1426959428}
+--- !u!1 &542081575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 542081576}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &542081576
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 542081575}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 33.96768, y: 1.6774968, z: -0.23828125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &707107195
 Prefab:
   m_ObjectHideFlags: 0
@@ -524,11 +554,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4188917281140380, guid: afee12c2644093b429efb7b135b86258, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 59.6
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 4188917281140380, guid: afee12c2644093b429efb7b135b86258, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.88
+      value: 0.63
       objectReference: {fileID: 0}
     - target: {fileID: 4188917281140380, guid: afee12c2644093b429efb7b135b86258, type: 2}
       propertyPath: m_LocalPosition.z
@@ -681,7 +711,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1309693103745670, guid: bcb6ce78b29b9be4ca5ab9e0a599bb57, type: 2}
       propertyPath: m_TagString
-      value: DeathObject
+      value: DeathZone
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bcb6ce78b29b9be4ca5ab9e0a599bb57, type: 2}
@@ -931,7 +961,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1309693103745670, guid: bcb6ce78b29b9be4ca5ab9e0a599bb57, type: 2}
       propertyPath: m_TagString
-      value: DeathObject
+      value: DeathZone
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bcb6ce78b29b9be4ca5ab9e0a599bb57, type: 2}
