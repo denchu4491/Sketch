@@ -67,7 +67,7 @@ public class SkecthBlock : BaseSketch {
     // Update is called once per frame
     protected override void Update () {
         base.Update();
-        if (Input.GetKey(KeyCode.Space) && isSketchable) {
+        if (Input.GetKeyDown(KeyCode.Space) && isSketchable) {
             DestroyBlock();
             Initialize();
         }
