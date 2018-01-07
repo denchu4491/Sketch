@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 50373851093203522}
   - component: {fileID: 114789101735495986}
   - component: {fileID: 95658197602037744}
+  - component: {fileID: 114394826926051852}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -58,7 +59,7 @@ GameObject:
   - component: {fileID: 114923293717934472}
   m_Layer: 0
   m_Name: PlayerBodyCollider
-  m_TagString: Untagged
+  m_TagString: PlayerBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -284,6 +285,21 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114394826926051852
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1006960406242380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11cf948bc4237dd4bac1bac983d56dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab:
+  - {fileID: 1935901270893500, guid: 7d23af7ffeb061e458bb19c3c518ff0d, type: 2}
+  setCol: {fileID: 61961709037125702}
+  releaseCol: {fileID: 61961709037125702}
 --- !u!114 &114789101735495986
 MonoBehaviour:
   m_ObjectHideFlags: 1
