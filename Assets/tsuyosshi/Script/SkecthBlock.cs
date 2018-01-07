@@ -9,8 +9,9 @@ public class SkecthBlock : BaseSketch {
     BoxCollider2D originBlock = new BoxCollider2D();
     BoxCollider2D[][] block = new BoxCollider2D[blockCount + 1][];
     [SerializeField] private GameObject prefab;
+    private float blockTime;
 
-    private void Initialize() {
+    private void InitializeBlock() {
         existBlockCount = 0;
         for(int y = 0; y <= blockCount; ++y) {
             for (int x = 0; x <= blockCount; ++x) {
@@ -56,21 +57,32 @@ public class SkecthBlock : BaseSketch {
         }
     }
 
+    private void CountTime() {
+        blockTime += Time.deltaTime;
+    }
+
+    private void ResetTime() {
+        blockTime = 0f;
+    }
+
 	// Use this for initialization
 	protected override void Start () {
         base.Start();
         originBlock = prefab.GetComponent<BoxCollider2D>();
         for (int i = 0; i <= blockCount; ++i) block[i] = new BoxCollider2D[blockCount + 1];
         for (int i = 0; i <= blockCount; ++i) sketchedBlock[i] = new int[blockCount + 1];
+        ResetTime();
     }
 
     // Update is called once per frame
     protected override void Update () {
         base.Update();
-        if (Input.GetKeyDown(KeyCode.Space) && isSketchable) {
+        if ((Input.GetKeyDown(KeyCode.Space) && isSketchable) || blockTime >= 5) {
             DestroyBlock();
-            Initialize();
+            InitializeBlock();
+            ResetTime();
         }
-        if(isSketchable)Sketch();
+        if (isSketchable) Sketch();
+        else if (!isSketchable) CountTime();
 	}
 }

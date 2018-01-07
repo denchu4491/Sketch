@@ -10,7 +10,6 @@ public class BaseSketch : MonoBehaviour {
     protected float blockSizeX, blockSizeY;
     public bool isSketchable;
 
-
     protected Vector3 GetScreenTopLeft() {
         Vector3 topLeft = mainCamera.ScreenToWorldPoint(Vector3.zero);
         topLeft.Scale(new Vector3(1f, -1f, 1f));
