@@ -7,7 +7,7 @@ public class PlayerBodyCollider : MonoBehaviour {
     PlayerController playerCtrl;
 
     void Awake() {
-        playerCtrl = GetComponent<PlayerController>();
+        playerCtrl = GetComponentInParent<PlayerController>();
     }
 
     void OnTriggerEnter2D(Collider2D col) {

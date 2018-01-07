@@ -44,7 +44,7 @@ public class PlayerController : BaseCharacterController {
         transform.localScale = new Vector3(basScaleX * dir, transform.localScale.y, transform.localScale.z);
 
         // 試験的
-        
+        Camera.main.transform.position = transform.position - Vector3.forward;
     }
 
     public override void ActionMove(float n) {
