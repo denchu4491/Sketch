@@ -65,11 +65,11 @@ public class SketchLine : BaseSketch {
 
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.X)) {
             RenderingSketchSquears();
             SetLine();
         }
-        else if(Input.GetKeyDown(KeyCode.Escape)) {
+        else if(Input.GetKeyDown(KeyCode.Z)) {
             RemoveLine();
         }
     }

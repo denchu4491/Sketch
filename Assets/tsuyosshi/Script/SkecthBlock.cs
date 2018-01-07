@@ -21,7 +21,7 @@ public class SkecthBlock : BaseSketch {
     }
 
     private bool CheckCollision(Vector2 position) {
-        var isCollision = Physics2D.OverlapBox(position, new Vector2(blockSizeX / 2.0f, blockSizeY / 2.0f), 0);
+        var isCollision = Physics2D.OverlapBox(position, new Vector2(blockSizeX * 0.8f, blockSizeY * 0.8f), 0);
         return (isCollision != null);
     }
 
@@ -77,7 +77,7 @@ public class SkecthBlock : BaseSketch {
     // Update is called once per frame
     protected override void Update () {
         base.Update();
-        if ((Input.GetKeyDown(KeyCode.Space) && isSketchable) || existBlockTime >= existBlockMaxTime) {
+        if ((Input.GetKeyDown(KeyCode.X) && isSketchable) || existBlockTime >= existBlockMaxTime) {
             DestroyBlock();
             InitializeBlock();
             ResetTime();

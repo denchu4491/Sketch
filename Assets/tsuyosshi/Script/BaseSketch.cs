@@ -39,7 +39,7 @@ public class BaseSketch : MonoBehaviour {
 
 	// Update is called once per frame
 	protected virtual void Update () {
-        if (Input.GetKeyDown(KeyCode.Space) && !isSketchable) isSketchable = true;
-        else if (Input.GetKeyDown(KeyCode.Escape)) isSketchable = false;
+        if (Input.GetKeyDown(KeyCode.X) && !isSketchable) isSketchable = true;
+        else if (Input.GetKeyDown(KeyCode.Z)) isSketchable = false;
 	}
 }
