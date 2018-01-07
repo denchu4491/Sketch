@@ -308,6 +308,7 @@ GameObject:
   - component: {fileID: 1681703248}
   - component: {fileID: 1681703247}
   - component: {fileID: 1681703246}
+  - component: {fileID: 1681703251}
   - component: {fileID: 1681703250}
   m_Layer: 0
   m_Name: Player
@@ -342,7 +343,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.05}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -353,7 +354,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.3}
+  m_Size: {x: 0.6, y: 1.4}
   m_EdgeRadius: 0
 --- !u!50 &1681703248
 Rigidbody2D:
@@ -403,6 +404,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 641bd15a311ccf744a65a7f5b06640bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1681703251
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1681703245}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: de721cd34914a0d49a79174f7e3a17ef, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1818334951
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,7 +512,7 @@ GameObject:
   - component: {fileID: 2035159461}
   - component: {fileID: 2035159460}
   m_Layer: 0
-  m_Name: natsunotomo
+  m_Name: PlayerSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -534,12 +552,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6970341a430f4084894619f617bfc65c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 217c155a509104045b1971cfc419df8f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 10, y: 7}
+  m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -551,7 +569,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2035159459}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.35, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1681703249}

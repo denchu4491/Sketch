@@ -16,6 +16,7 @@ public class BaseCharacterController : MonoBehaviour {
     protected bool groundedPrev = false;
     protected bool activeSts = false;
 
+    protected Animator animator;
     protected Transform groundCheck_L;
     protected Transform groundCheck_C;
     protected Transform groundCheck_R;
@@ -23,6 +24,7 @@ public class BaseCharacterController : MonoBehaviour {
     protected float jumpStartTime = 0.0f;
 
     protected virtual void Awake() {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         groundCheck_L = transform.Find("GroundCheck_L");
         groundCheck_C = transform.Find("GroundCheck_C");
@@ -88,8 +90,10 @@ public class BaseCharacterController : MonoBehaviour {
         if (n != 0.0f){
             dir = Mathf.Sign(n);
             speedVx = speed * n;
+            animator.SetTrigger("Walk");
         } else {
             speedVx = 0;
+            animator.SetTrigger("Idle");
         }
     }
 
