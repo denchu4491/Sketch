@@ -21,8 +21,8 @@ public class SkecthBlock : BaseSketch {
     }
 
     private bool CheckCollision(Vector2 position) {
-        bool isCollision = Physics2D.BoxCast(position, new Vector2(blockSizeX, blockSizeY), 0f, Vector2.zero);
-        return isCollision;
+        var isCollision = Physics2D.OverlapBox(position, new Vector2(blockSizeX / 2.0f, blockSizeY / 2.0f), 0);
+        return (isCollision != null);
     }
 
     private void CreateBlock(int blockIndX,int blockIndY) {
@@ -33,7 +33,6 @@ public class SkecthBlock : BaseSketch {
         if (CheckCollision(position)) return;
         sketchedBlock[blockIndY][blockIndX] = 1;
         existBlockCount++;
-        //3倍するとなんかよくなる
         block[blockIndY][blockIndX] = Instantiate(originBlock);
         BoxCollider2D box2D = block[blockIndY][blockIndX].GetComponent<BoxCollider2D>();
         box2D.transform.localScale = new Vector2(1.3f * blockSizeX, 1.3f * blockSizeY);
