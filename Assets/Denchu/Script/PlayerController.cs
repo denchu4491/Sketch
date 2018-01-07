@@ -7,10 +7,15 @@ public class PlayerController : BaseCharacterController {
     public float initHpMax = 20.0f;
     public float initSpeed = 12.0f;
     public float jumpPower = 10.0f;
+    private static float createdDir = 0.0f;
 
     protected override void Awake() {
         base.Awake();
 
+        if(createdDir != 0.0f) {
+            dir = createdDir;
+        }
+        
         // パラメータ初期化
         speed = initSpeed;
         SetHp(initHpMax, initHpMax);
@@ -59,5 +64,9 @@ public class PlayerController : BaseCharacterController {
         jumped = true;
         jumpStartTime = Time.fixedTime;
         rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+    }
+
+    public static void DirChange(float d) {
+        createdDir = d;
     }
 }

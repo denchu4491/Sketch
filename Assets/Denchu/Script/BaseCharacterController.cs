@@ -6,7 +6,7 @@ public class BaseCharacterController : MonoBehaviour {
 
     protected float hp = 10.0f;
     protected float hpMax = 10.0f;
-    protected float dir = 1.0f;
+    protected float dir;
     protected float speed = 1.0f;
     protected float basScaleX = 1.0f;
     protected float speedVx = 0.0f;
@@ -31,7 +31,7 @@ public class BaseCharacterController : MonoBehaviour {
         groundCheck_R = transform.Find("GroundCheck_R");
 
         dir = (transform.localScale.x > 0.0f) ? 1 : -1;
-        basScaleX = transform.localScale.x * dir;
+        basScaleX = Mathf.Abs(transform.localScale.x * dir);
         transform.localScale = new Vector3(basScaleX, transform.localScale.y, transform.localScale.z);
 
         activeSts = true;
@@ -111,4 +111,5 @@ public class BaseCharacterController : MonoBehaviour {
         rb.Sleep();
         activeSts = false;
     }
+
 }
