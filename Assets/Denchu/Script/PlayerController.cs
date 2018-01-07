@@ -55,7 +55,7 @@ public class PlayerController : BaseCharacterController {
     }
 
     public void ActionJump() {
-        if (jumped) return;
+        if (!grounded) return;
         jumped = true;
         jumpStartTime = Time.fixedTime;
         rb.velocity = new Vector2(rb.velocity.x, jumpPower);
