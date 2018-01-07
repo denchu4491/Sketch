@@ -19,11 +19,18 @@ public class SkecthBlock : BaseSketch {
         }
     }
 
+    private bool CheckCollision(Vector2 position) {
+        bool isCollision = Physics2D.BoxCast(position, new Vector2(blockSizeX, blockSizeX), 0f, Vector2.zero);
+        return isCollision;
+    }
+
     private void CreateBlock(int blockIndX,int blockIndY) {
+        Vector2 topLeft = GetScreenTopLeft();
+        Vector2 position = new Vector2(topLeft.x + blockSizeX * blockIndX + (blockSizeX / 2), topLeft.y + blockSizeY * blockIndY + (blockSizeY / 2));
         if (sketchedBlock[blockIndY][blockIndX] == 1) return;
+        if (CheckCollision(position)) return;
         sketchedBlock[blockIndY][blockIndX] = 1;
         existBlockCount++;
-        Vector2 topLeft = GetScreenTopLeft();
         //3倍するとなんかよくなる
         block[blockIndY][blockIndX] = Instantiate(originBlock);
         BoxCollider2D box2D = block[blockIndY][blockIndX].GetComponent<BoxCollider2D>();
