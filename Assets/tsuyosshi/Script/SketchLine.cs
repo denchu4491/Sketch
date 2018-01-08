@@ -9,22 +9,24 @@ public class SketchLine : BaseSketch {
     LineRenderer[] lineRendererY;
     [SerializeField] private GameObject prefab;
     private LineRenderer _renderer;
+    private Vector2 topLeftLinePos, BottomRightLinePos; 
 
     public void RenderingSketchSquears() {
-        Vector2 topLeft = GetScreenTopLeft(), bottomRight = GetScreenBottomRight();
+        topLeftLinePos = GetScreenTopLeft(mainCamera);
+        BottomRightLinePos = GetScreenBottomRight(mainCamera);
         for (int x = 0; x <= columnBlockMaxCount; x++) {
             var line = lineRendererX[x];
             line.SetWidth(0.1f, 0.1f);
             line.SetVertexCount(2);
-            line.SetPosition(0, new Vector3(topLeft.x + x * blockSizeX, topLeft.y, 0f));
-            line.SetPosition(1, new Vector3(topLeft.x + x * blockSizeX, bottomRight.y, 0f));
+            line.SetPosition(0, new Vector3(topLeftLinePos.x + x * blockSizeX, topLeftLinePos.y, 0f));
+            line.SetPosition(1, new Vector3(topLeftLinePos.x + x * blockSizeX, BottomRightLinePos.y, 0f));
         }
         for (int y = 0; y <= rowBlockMaxCount; y++) {
             var line = lineRendererY[y];
             line.SetWidth(0.1f, 0.1f);
             line.SetVertexCount(2);
-            line.SetPosition(0, new Vector3(topLeft.x, topLeft.y + y * blockSizeY, 0f));
-            line.SetPosition(1, new Vector3(bottomRight.x, topLeft.y + y * blockSizeY, 0f));
+            line.SetPosition(0, new Vector3(topLeftLinePos.x, topLeftLinePos.y + y * blockSizeY, 0f));
+            line.SetPosition(1, new Vector3(BottomRightLinePos.x, topLeftLinePos.y + y * blockSizeY, 0f));
         }
     }
 
@@ -66,8 +68,8 @@ public class SketchLine : BaseSketch {
         base.Update();
 
         if (Input.GetKeyDown(KeyCode.X)) {
-            RenderingSketchSquears();
             SetLine();
+            RenderingSketchSquears();
         }
         else if(Input.GetKeyDown(KeyCode.Z)) {
             RemoveLine();

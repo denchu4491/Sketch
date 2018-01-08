@@ -44,14 +44,14 @@ public class SkecthBlock : BaseSketch {
 
 
     private void SetSketchMode() {
-        topLeftSketchPos = GetScreenTopLeft();
-        BottomRightSketchPos = GetScreenBottomRight();
+        topLeftSketchPos = GetScreenTopLeft(mainCamera);
+        BottomRightSketchPos = GetScreenBottomRight(mainCamera);
     }
 
     public void Sketch() {
         Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         if (existBlockCount >= existBlockMaxCount) return;
-        if (mousePosition.x < topLeftSketchPos.x || mousePosition.x > BottomRightSketchPos.x || mousePosition.y > topLeftSketchPos.y || mousePosition.y < BottomRightSketchPos.y) return;
+        if (mousePosition.x < topLeftSketchPos.x || mousePosition.x > BottomRightSketchPos.x || mousePosition.y < topLeftSketchPos.y || mousePosition.y > BottomRightSketchPos.y) return;
         if (Input.GetMouseButton(0)) {
             CreateBlock((int)((mousePosition.x - topLeftSketchPos.x) / blockSizeX), (int)((mousePosition.y - topLeftSketchPos.y) / blockSizeY));
         }
@@ -77,6 +77,7 @@ public class SkecthBlock : BaseSketch {
     protected override void Update () {
         base.Update();
         if ((Input.GetKeyDown(KeyCode.X)) || existBlockTime >= existBlockMaxTime) {
+            Debug.Log(isSketchable);
             Initialize();
         }
         if (isSketchable) {
