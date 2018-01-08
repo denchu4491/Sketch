@@ -13,15 +13,15 @@ public class BaseSketch : MonoBehaviour {
     protected float blockSizeX, blockSizeY;
     public bool isSketchable;
 
-    protected Vector3 GetScreenTopLeft() {
-        Vector3 topLeft = mainCamera.ScreenToWorldPoint(Vector3.zero);
-        topLeft.Scale(new Vector3(1f, -1f, 1f));
+    protected Vector3 GetScreenTopLeft(Camera _mainCamera) {
+        Vector3 topLeft = _mainCamera.ScreenToWorldPoint(Vector3.zero);
+        topLeft.Scale(new Vector3(1f, 1f, 1f));
         return topLeft;
     }
 
-    protected Vector3 GetScreenBottomRight() {
-        Vector3 bottomRight = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0.0f));
-        bottomRight.Scale(new Vector3(1f, -1f, 1f));
+    protected Vector3 GetScreenBottomRight(Camera _mainCamera) {
+        Vector3 bottomRight = _mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0.0f));
+        bottomRight.Scale(new Vector3(1f, 1f, 1f));
         return bottomRight;
     }
 
@@ -30,7 +30,7 @@ public class BaseSketch : MonoBehaviour {
     protected virtual void Start () {
         GameObject obj = GameObject.Find("Main Camera");
         mainCamera = obj.GetComponent<Camera>();
-        Vector2 topLeft = GetScreenTopLeft(), bottomRight = GetScreenBottomRight();
+        Vector2 topLeft = GetScreenTopLeft(mainCamera), bottomRight = GetScreenBottomRight(mainCamera);
         float screenWidth = bottomRight.x - topLeft.x;
         float screenHight = bottomRight.y - topLeft.y;
         blockSizeX = screenWidth / columnBlockMaxCount;
@@ -39,7 +39,7 @@ public class BaseSketch : MonoBehaviour {
 
 	// Update is called once per frame
 	protected virtual void Update () {
-        if (Input.GetKeyDown(KeyCode.X) && !isSketchable) isSketchable = true;
+        if (Input.GetKeyDown(KeyCode.X)) isSketchable = true;
         else if (Input.GetKeyDown(KeyCode.Z)) isSketchable = false;
 	}
 }
