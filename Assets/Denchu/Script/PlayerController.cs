@@ -8,6 +8,12 @@ public class PlayerController : BaseCharacterController {
     public float initSpeed = 12.0f;
     public float jumpPower = 10.0f;
     private static float createdDir = 0.0f;
+    private bool breakEnabled = true;
+    private float groundFriction = 0.0f;
+    private bool isSketchStoped = false;
+    
+    //public readonly static int ANIST_Walk = Animator.StringToHash("Base layer.Player_Walk");
+    public readonly static int ANITAG_Walk = Animator.StringToHash("Walk");
 
     protected override void Awake() {
         base.Awake();
@@ -22,6 +28,19 @@ public class PlayerController : BaseCharacterController {
     }
 
     protected override void Update() {
+        if (Input.GetKeyDown(KeyCode.X)) {
+            if (isSketchStoped) {
+                isSketchStoped = false;
+                activeSts = true;
+            } else {
+                isSketchStoped = true;
+                ActionStop();
+            }
+        }
+
+        if (!activeSts) {
+            return;
+        }
         // 矢印の左右の入力検出
         //float joyMv = Input.GetAxis("Horizontal");
         float vx = 0.0f;
@@ -48,15 +67,41 @@ public class PlayerController : BaseCharacterController {
 
         transform.localScale = new Vector3(basScaleX * dir, transform.localScale.y, transform.localScale.z);
 
+        //移動停止処理
+        if (breakEnabled) {
+            speedVx *= groundFriction;
+        }
+
         // 試験的
         Camera.main.transform.position = transform.position - Vector3.forward;
     }
 
     public override void ActionMove(float n) {
+
         if (!activeSts) {
             return;
         }
-        base.ActionMove(n);
+
+        float dirOld = dir;
+        breakEnabled = false;
+
+        if(n!= 0.0f) {
+            dir = Mathf.Sign(n);
+            speedVx = initSpeed * n;
+
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            //bool hoge = stateInfo.IsName("Base Layer.Player_Walk");
+            if (stateInfo.tagHash != ANITAG_Walk) {
+                animator.SetTrigger("Walk");
+            }
+        } else {
+            breakEnabled = true;
+            animator.SetTrigger("Idle");
+        }
+
+        if(dirOld != dir) {
+            breakEnabled = true;
+        }
     }
 
     public void ActionJump() {
@@ -68,5 +113,11 @@ public class PlayerController : BaseCharacterController {
 
     public static void DirChange(float d) {
         createdDir = d;
+    }
+
+    public void ActionStop() {
+        activeSts = false;
+        breakEnabled = true;
+        animator.SetTrigger("Idle");
     }
 }

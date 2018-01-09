@@ -8,7 +8,11 @@ TagManager:
   - DeathZone
   - Trans
   - PlayerBody
+<<<<<<< HEAD
   - DeathObject
+=======
+  - Clear
+>>>>>>> Player
   layers:
   - Default
   - TransparentFX
