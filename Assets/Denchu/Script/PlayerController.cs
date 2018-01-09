@@ -29,12 +29,16 @@ public class PlayerController : BaseCharacterController {
 
     protected override void Update() {
         if (Input.GetKeyDown(KeyCode.X)) {
-            if (isSketchStoped) {
-                isSketchStoped = false;
-                activeSts = true;
-            } else {
+            if(!isSketchStoped) {
                 isSketchStoped = true;
                 ActionStop();
+            }
+        }
+
+        if (isSketchStoped) {
+            if (Input.GetKeyDown(KeyCode.Z)) {
+                isSketchStoped = false;
+                activeSts = true;
             }
         }
 

@@ -4,15 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - block
   - DeathZone
+  - block
   - Trans
   - PlayerBody
-<<<<<<< HEAD
-  - DeathObject
-=======
   - Clear
->>>>>>> Player
   layers:
   - Default
   - TransparentFX
@@ -51,8 +47,8 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: Player
-    uniqueID: 3163305825
+    uniqueID: 573235041
     locked: 0
   - name: Cloud
-    uniqueID: 1299194479
+    uniqueID: 3423413505
     locked: 0
