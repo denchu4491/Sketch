@@ -77,7 +77,7 @@ public class SkecthBlock : BaseSketch {
     protected override void Update () {
         base.Update();
         if ((Input.GetKeyDown(KeyCode.X)) || existBlockTime >= existBlockMaxTime) {
-            Debug.Log(isSketchable);
+            //Debug.Log(isSketchable);
             Initialize();
         }
         if (isSketchable) {
